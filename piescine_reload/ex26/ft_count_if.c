@@ -6,24 +6,24 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 19:20:37 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/02/17 19:30:26 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/04 18:40:39 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_count_if(char **tab, int length, int (*f)(char*))
+int	ft_count_if(char **tab, int (*f)(char*))
 {
-	int	i;
-	int	count;
+	int		count;
+	char	**val;
 
-	if (!tab || length <= 0 || !f)
+	if (!tab || !f)
 		return (0);
-	i = 0;
 	count = 0;
-	while (i < length)
+	val = tab;
+	while (*val)
 	{
-		if (f(tab[i]) != 0)
+		if ((*f)(*val) == 1)
 			count++;
-		i++;
+		val++;
 	}
 	return (count);
 }
@@ -42,7 +42,7 @@ int	ft_count_if(char **tab, int length, int (*f)(char*))
 
 // int	is_too_long(char *str)
 // {
-// 	if (ft_strlen(str) < 3)
+// 	if (ft_strlen(str) >= 4)
 // 		return (1);
 // 	return (0);
 // }
@@ -51,11 +51,14 @@ int	ft_count_if(char **tab, int length, int (*f)(char*))
 
 // int	main(void)
 // {
-// 	char	*tab[4];
+// 	char	*tab[7];
 
-// 	tab[0] = "12";
+// 	tab[0] = "132312";
 // 	tab[1] = "123";
 // 	tab[2] = "4323";
-// 	tab[3] = NULL;
-// 	printf("%d \n", ft_count_if(tab, 3, &is_too_long));
+// 	tab[3] = "4323";
+// 	tab[4] = "43";
+// 	tab[5] = "233143";
+// 	tab[6] = NULL;
+// 	printf("%d \n", ft_count_if(tab, &is_too_long));
 // }

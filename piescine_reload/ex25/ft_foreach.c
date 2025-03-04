@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 16:56:52 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/02/17 19:08:24 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/04 19:14:11 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@ void	ft_foreach(int *tab, int length, void (*f)(int))
 {
 	int	i;
 
-	if (!tab || length <= 0 || !f)
+	if (!tab || !f)
 		return ;
 	i = 0;
 	while (i < length)
 	{
-		f(tab[i]);
+		(*f)(tab[i]);
 		i++;
 	}
 }
