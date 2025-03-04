@@ -6,11 +6,12 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:12:28 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/02/11 15:12:42 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/04 17:13:54 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include "abc.h"
 
 void	ft_putchar(char c)
 {
