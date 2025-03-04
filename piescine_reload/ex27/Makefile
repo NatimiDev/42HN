@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/03/04 20:54:00 by nmikuka           #+#    #+#              #
+#    Updated: 2025/03/04 20:54:52 by nmikuka          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 # Compiler and flags
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
@@ -10,10 +22,6 @@ NAME = ft_display_file
 
 # Default rule (equivalent to "make all")
 all: $(NAME)
-
-# Compile object files
-%.o: %.c
-	$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
 
 # Create the static library
 $(NAME):
