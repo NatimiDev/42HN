@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:45:51 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/02/14 21:17:11 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/04 16:59:21 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,12 @@ char	*ft_strdup(char *src)
 // 	char	*dst;
 // 	char	*src;
 
-// 	src = "";
-// 	dst = "";
+// 	src = "Hello World";
 // 	dst = ft_strdup(src);
 // 	printf("%s %s\n", src, dst);
+// 	free(dst);
+// 	src = "Hello";
+// 	dst = ft_strdup(src);
+// 	printf("%s %s\n", src, dst);
+// 	free(dst);
 // }

@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:11:14 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/01/30 08:15:38 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/04 16:59:12 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,13 @@ int	*ft_range(int min, int max)
 
 // int	main(void)
 // {
-// 	int i = 0;
-// 	int l = 40;
-// 	int *a;
+// 	int	i;
+// 	int	l;
+// 	int	*a;
 
-// 	a = ft_range(10, 10+l);
+// 	i = 0;
+// 	l = 5;
+// 	a = ft_range(10, 10 + l);
 // 	printf("%p\n", a);
 // 	while (a && i < l)
 // 	{
