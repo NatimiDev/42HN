@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 15:50:29 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/02/14 18:35:44 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/04 16:39:40 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ int	ft_strcmp(char *s1, char *s2)
 		s1++;
 		s2++;
 	}
-	if (*s1 != *s2)
-		return (*s1 - *s2);
-	return (0);
+	return (*s1 - *s2);
 }
 
 void	ft_sort(char **tab, int size)
