@@ -21,7 +21,7 @@ INCDIR = includes
 # Source files and object files
 SRCS = $(SRCDIR)/ft_putchar.c $(SRCDIR)/ft_swap.c $(SRCDIR)/ft_putstr.c \
        $(SRCDIR)/ft_strlen.c $(SRCDIR)/ft_strcmp.c
-OBJS = $(SRCS:.c=.o)
+OBJS = ft_putchar.o ft_swap.o ft_putstr.o ft_strlen.o ft_strcmp.o
 
 # Library name
 NAME = libft.a
@@ -29,12 +29,9 @@ NAME = libft.a
 # Default rule (equivalent to "make all")
 all: $(NAME)
 
-# Compile object files
-%.o: %.c
-	$(CC) $(CFLAGS) -I $(INCDIR) -c $< -o $@
-
-# Create the static library
-$(NAME): $(OBJS)
+# Create the library
+$(NAME):
+	$(CC) $(CFLAGS) -I $(INCDIR) -c $(SRCS)
 	ar rcs $(NAME) $(OBJS)
 
 # Remove object files
