@@ -6,11 +6,11 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 19:07:03 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/04 15:29:47 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/05 21:30:05 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+void	ft_putchar(char c);
 
 void	ft_putstr(char *str)
 {
@@ -18,7 +18,7 @@ void	ft_putstr(char *str)
 		return ;
 	while (*str != '\0')
 	{
-		write(1, str, 1);
+		ft_putchar(*str);
 		str++;
 	}
 }

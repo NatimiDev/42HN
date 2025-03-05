@@ -6,20 +6,20 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 15:50:29 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/04 16:39:40 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/05 21:31:37 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+void	ft_putchar(char c);
 
 void	ft_put_str(char *str)
 {
 	while (*str != '\0')
 	{
-		write(1, str, 1);
+		ft_putchar(*str);
 		str++;
 	}
-	write(1, "\n", 1);
+	ft_putchar('\n');
 }
 
 int	ft_strcmp(char *s1, char *s2)

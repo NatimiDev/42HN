@@ -6,11 +6,11 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:14:42 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/03 21:10:56 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/05 21:29:19 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+void	ft_putchar(char c);
 
 void	ft_is_negative(int n)
 {
@@ -20,7 +20,7 @@ void	ft_is_negative(int n)
 		sign_indicator = 'N';
 	else
 		sign_indicator = 'P';
-	write(1, &sign_indicator, 1);
+	ft_putchar(sign_indicator);
 }
 
 // int	main(void)
