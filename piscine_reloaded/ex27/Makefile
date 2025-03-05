@@ -15,7 +15,8 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 # Source files and object files
-SRCS = ft_display_file.c
+SRCS = main.c
+OBJS = main.o
 
 # Library name
 NAME = ft_display_file
@@ -29,10 +30,11 @@ $(NAME):
 
 # Remove object files
 clean:
-	rm -f $(NAME)
+	rm -f $(OBJS)
 
 # Remove everything including the library
 fclean: clean
+	rm -f $(NAME)
 
 # Recompile everything
 re: fclean all
