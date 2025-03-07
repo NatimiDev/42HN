@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 10:29:36 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/07 19:56:12 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/07 20:34:10 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,10 +229,10 @@ int	test_strl(size_t (*ft)(char *, const char *, size_t), size_t (*orig)(char *,
 	size_t	ft_result;
 	size_t	exp_result;
 	char 	src[13] = "Hello, World!";
-    char	dst1[20];
-    char	dst2[20];
-    char	dst3[25] = "42";
-    char	dst4[25] = "42";
+	char	dst1[20];
+	char	dst2[20];
+	char	dst3[25] = "42";
+	char	dst4[25] = "42";
 
 	printf("\n--- Testing %s ---\n", ft_name);
 	exp_result = (*orig)(dst1, src, sizeof(src));
@@ -253,6 +253,28 @@ int	test_strl(size_t (*ft)(char *, const char *, size_t), size_t (*orig)(char *,
 		printf("❌ %s failed! Expected %zu, got %zu\n", ft_name, exp_result, ft_result);
 	if (strcmp(dst3, dst4) != 0)
 		printf("❌ %s failed! Expected %s, got %s\n", ft_name, dst3, dst4);
+	return (1);
+}
+
+int	test_strchr(char *(*ft)(const char *, int), char *(*orig)(const char *, int), char *ft_name)
+{
+	char	*ft_result;
+	char	*exp_result;
+	char 	*src = "Hello, World!";
+
+	printf("\n--- Testing %s ---\n", ft_name);
+	exp_result = (*orig)(src, 'o');
+	ft_result = (*ft)(src, 'o');
+	if (exp_result != ft_result)
+		printf("❌ %s failed! Expected %s, got %s\n", ft_name, exp_result, ft_result);
+	exp_result = (*orig)(src, '\0');
+	ft_result = (*ft)(src, '\0');
+	if (exp_result != ft_result)
+		printf("❌ %s failed! Expected %s, got %s\n", ft_name, exp_result, ft_result);
+	exp_result = (*orig)(src, 'x');
+	ft_result = (*ft)(src, 'x');
+	if (exp_result != ft_result)
+		printf("❌ %s failed! Expected %s, got %s\n", ft_name, exp_result, ft_result);
 	return (1);
 }
 
@@ -311,6 +333,8 @@ int	main(void)
 	test_strlen();
 	test_strl(ft_strlcpy, strlcpy, "ft_strlcpy");
 	test_strl(ft_strlcat, strlcat, "ft_strlcat");
+	test_strchr(ft_strchr, strchr, "ft_strchr");
+	test_strchr(ft_strrchr, strrchr, "ft_strrchr");
 // test_strdup();
 // test_strjoin();
 // test_memset();
