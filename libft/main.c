@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 10:29:36 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/07 20:34:10 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/07 21:16:44 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -275,6 +275,80 @@ int	test_strchr(char *(*ft)(const char *, int), char *(*orig)(const char *, int)
 	ft_result = (*ft)(src, 'x');
 	if (exp_result != ft_result)
 		printf("❌ %s failed! Expected %s, got %s\n", ft_name, exp_result, ft_result);
+	exp_result = (*orig)("", 300);
+	ft_result = (*ft)("", 300);
+		if (exp_result != ft_result)
+			printf("❌ %s failed! Expected %s, got %s\n", ft_name, exp_result, ft_result);
+	return (1);
+}
+
+
+int	test_strncmp()
+{
+	int		i;
+	int		ft_result;
+	int		exp_result;
+	char 	*str;
+	char 	*str2;
+
+	printf("\n--- Testing %s ---\n", "ft_strncmp");
+	printf("Testing empty string...\n");
+	str = "";
+	str2 = "";
+	exp_result = strncmp(str, str2, strlen(str));
+	ft_result = ft_strncmp(str, str2, strlen(str));
+	if (exp_result != ft_result)
+	printf("❌ %s failed! Expected %d, got %d\n", "ft_strncmp", exp_result, ft_result);
+	printf("Testing identical string...\n");
+		str = "Hello, World!";
+		str2 = "Hello, World!";
+	exp_result = strncmp(str, str2, strlen(str));
+	ft_result = ft_strncmp(str, str2, strlen(str));
+	if (exp_result != ft_result)
+			printf("❌ %s failed! Expected %d, got %d\n", "ft_strncmp", exp_result, ft_result);
+	printf("Testing not identical string...\n");
+	str = "Hello, World!";
+	str2 = "Hello";
+	exp_result = strncmp(str, str2, strlen(str));
+	ft_result = ft_strncmp(str, str2, strlen(str));
+	if (exp_result != ft_result)
+		printf("❌ %s failed! Expected %d, got %d\n", "ft_strncmp", exp_result, ft_result);
+	str = "Hello";
+	str2 = "Hello, World!";
+	exp_result = strncmp(str, str2, strlen(str));
+	ft_result = ft_strncmp(str, str2, strlen(str));
+	if (exp_result != ft_result)
+		printf("❌ %s failed! Expected %d, got %d\n", "ft_strncmp", exp_result, ft_result);
+	return (1);
+}
+
+int	test_strnstr()
+{
+	char	*ft_result;
+	char	*exp_result;
+	char 	*src = "Hello, World!";
+
+	printf("\n--- Testing ft_strnstr ---\n");
+	printf("Testing searching empty string...\n");
+	exp_result = strnstr(src,  "", strlen(src));
+	ft_result = ft_strnstr(src, "", strlen(src));
+	if (exp_result != ft_result)
+		printf("❌ failed! Expected %s, got %s\n", exp_result, ft_result);
+	printf("Testing existing string...\n");
+	exp_result = strnstr(src, "o, ", strlen(src));
+	ft_result = ft_strnstr(src, "o, ", strlen(src));
+	if (exp_result != ft_result)
+		printf("❌ failed! Expected %s, got %s\n", exp_result, ft_result);
+	printf("Testing not existing string...\n");
+	exp_result = strnstr(src, "z", strlen(src));
+	ft_result = ft_strnstr(src, "z", strlen(src));
+	if (exp_result != ft_result)
+		printf("❌ failed! Expected %s, got %s\n", exp_result, ft_result);
+	printf("Testing searching in empty string...\n");
+	exp_result = strnstr("", "z", 0);
+	ft_result = ft_strnstr("", "z", 0);
+	if (exp_result != ft_result)
+		printf("❌ failed! Expected %s, got %s\n", exp_result, ft_result);
 	return (1);
 }
 
@@ -335,6 +409,8 @@ int	main(void)
 	test_strl(ft_strlcat, strlcat, "ft_strlcat");
 	test_strchr(ft_strchr, strchr, "ft_strchr");
 	test_strchr(ft_strrchr, strrchr, "ft_strrchr");
+	test_strncmp();
+	test_strnstr();
 // test_strdup();
 // test_strjoin();
 // test_memset();
