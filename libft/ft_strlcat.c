@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/06 22:48:40 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/07 19:58:19 by nmikuka          ###   ########.fr       */
+/*   Created: 2025/03/07 17:12:24 by nmikuka           #+#    #+#             */
+/*   Updated: 2025/03/07 19:57:36 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcpy(char *restrict dst, const char *restrict src, size_t dstsize)
+size_t	ft_strlcat(char *restrict dst, const char *restrict src, size_t dstsize)
 {
+	size_t	dst_len;
 	size_t	src_len;
+	size_t	to_copy;
 
+	dst_len = ft_strlen(dst);
 	src_len = ft_strlen(src);
-	while (dstsize > 1)
+	dst += dst_len;
+	to_copy = dstsize - dst_len;
+	while (to_copy > 1)
 	{
 		*dst = *src;
 		dst++;
 		src++;
-		dstsize--;
+		to_copy--;
 	}
-	if (dstsize != 0)
+	if (to_copy > 0)
 		*dst = '\0';
-	return (src_len);
+	return (dst_len + src_len);
 }

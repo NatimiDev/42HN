@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 10:29:36 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/07 16:58:15 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/07 19:56:12 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,6 +224,38 @@ int	test_strlen()
 	return (1);
 }
 
+int	test_strl(size_t (*ft)(char *, const char *, size_t), size_t (*orig)(char *, const char *, size_t), char *ft_name)
+{
+	size_t	ft_result;
+	size_t	exp_result;
+	char 	src[13] = "Hello, World!";
+    char	dst1[20];
+    char	dst2[20];
+    char	dst3[25] = "42";
+    char	dst4[25] = "42";
+
+	printf("\n--- Testing %s ---\n", ft_name);
+	exp_result = (*orig)(dst1, src, sizeof(src));
+	ft_result = (*ft)(dst2, src, sizeof(src));
+	if (exp_result != ft_result)
+		printf("❌ %s failed! Expected %zu, got %zu\n", ft_name, exp_result, ft_result);
+	if (strcmp(dst1, dst2) != 0)
+		printf("❌ %s failed! Expected %s, got %s\n", ft_name, dst1, dst2);
+	exp_result = (*orig)(dst3, src, sizeof(src));
+	ft_result = (*ft)(dst4, src, sizeof(src));
+	if (exp_result != ft_result)
+		printf("❌ %s failed! Expected %zu, got %zu\n", ft_name, exp_result, ft_result);
+	if (strcmp(dst3, dst4) != 0)
+		printf("❌ %s failed! Expected %s, got %s\n", ft_name, dst3, dst4);
+	exp_result = (*orig)(dst3, src, sizeof(src));
+	ft_result = (*ft)(dst4, src, sizeof(src));
+	if (exp_result != ft_result)
+		printf("❌ %s failed! Expected %zu, got %zu\n", ft_name, exp_result, ft_result);
+	if (strcmp(dst3, dst4) != 0)
+		printf("❌ %s failed! Expected %s, got %s\n", ft_name, dst3, dst4);
+	return (1);
+}
+
 // void test_strdup()
 // {
 //     printf("\n--- Testing ft_strdup ---\n");
@@ -277,6 +309,8 @@ int	main(void)
 	test_memcmp();
 	
 	test_strlen();
+	test_strl(ft_strlcpy, strlcpy, "ft_strlcpy");
+	test_strl(ft_strlcat, strlcat, "ft_strlcat");
 // test_strdup();
 // test_strjoin();
 // test_memset();
