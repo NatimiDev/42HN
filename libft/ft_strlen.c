@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 22:31:19 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/06 22:44:57 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/07 20:06:37 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	ft_strlen(const char *s)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	while (s[len])
