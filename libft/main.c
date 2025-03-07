@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 10:29:36 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/07 21:16:44 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/07 21:40:53 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -352,6 +352,37 @@ int	test_strnstr()
 	return (1);
 }
 
+void test_atoi()
+{
+	int	ft_result;
+	int	exp_result;
+
+	printf("\n--- Testing ft_atoi ---\n");
+	exp_result = atoi("42");
+	ft_result = ft_atoi("42");
+	if (exp_result != ft_result)
+		printf("❌ failed! Expected %d, got %d\n", exp_result, ft_result);
+	exp_result = atoi("-123");	
+	ft_result = ft_atoi("-123");
+	if (exp_result != ft_result)
+		printf("❌ failed! Expected %d, got %d\n", exp_result, ft_result);
+	exp_result = atoi("0");
+	ft_result = ft_atoi("0");
+	if (exp_result != ft_result)
+		printf("❌ failed! Expected %d, got %d\n", exp_result, ft_result);
+	exp_result = atoi("+-+15");	
+	ft_result = ft_atoi("+-+15");
+	if (exp_result != ft_result)
+		printf("❌ failed! Expected %d, got %d\n", exp_result, ft_result);
+	exp_result = atoi(" \t\n\r\v\f+15");	
+	ft_result = ft_atoi(" \t\n\r\v\f+15");
+	if (exp_result != ft_result)
+		printf("❌ failed! Expected %d, got %d\n", exp_result, ft_result);
+	exp_result = atoi("fjalkd");	
+	ft_result = ft_atoi("fjalkd");
+	if (exp_result != ft_result)
+		printf("❌ failed! Expected %d, got %d\n", exp_result, ft_result);
+}
 // void test_strdup()
 // {
 //     printf("\n--- Testing ft_strdup ---\n");
@@ -369,15 +400,6 @@ int	test_strnstr()
 //     char *result = ft_strjoin(s1, s2);
 //     printf("Result: %s (Expected: Hello, World!)\n", result);
 //     free(result);
-// }
-
-// void test_atoi()
-// {
-//     printf("\n--- Testing ft_atoi ---\n");
-//     printf("ft_atoi('42') = %d (Expected: 42)\n", ft_atoi("42"));
-//     printf("ft_atoi('-123') = %d (Expected: -123)\n", ft_atoi("-123"));
-//     printf("ft_atoi('   56') = %d (Expected: 56)\n", ft_atoi("   56"));
-//     printf("ft_atoi('0') = %d (Expected: 0)\n", ft_atoi("0"));
 // }
 
 // void test_putstr_fd()
@@ -411,10 +433,10 @@ int	main(void)
 	test_strchr(ft_strrchr, strrchr, "ft_strrchr");
 	test_strncmp();
 	test_strnstr();
+	test_atoi();
 // test_strdup();
 // test_strjoin();
 // test_memset();
-// test_atoi();
 // test_putstr_fd();
 	printf("\n==== Tests Completed! ====\n");
 	return (0);
