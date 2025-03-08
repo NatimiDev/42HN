@@ -1,27 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/07 21:25:10 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/08 17:40:08 by nmikuka          ###   ########.fr       */
+/*   Created: 2025/03/08 18:06:05 by nmikuka           #+#    #+#             */
+/*   Updated: 2025/03/08 20:01:00 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+int		is_in_charset(char const c, char const *set)
 {
-	char	*dst;
-	int		size;
+	while (*set)
+	{
+		if (c == *set)
+			return (1);
+		set++;
+	}
+	return (0);
+}
 
-	size = ft_strlen(s1) + 1;
-	dst = malloc(sizeof(char) * (size));
-	if (dst == NULL)
-		return (NULL);
-	ft_strlcpy(dst, s1, size);
-	return (dst);
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	int	end;
+	int	start;
+
+	start = 0;
+	end = ft_strlen(s1) - 1;
+	while (s1[start] && is_in_charset(s1[start], set))
+		start++;
+	while (end >= start && is_in_charset(s1[end], set))
+		end--;
+	return (ft_substr(s1, start, end - start + 1));
 }

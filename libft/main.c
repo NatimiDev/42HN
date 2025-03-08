@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 10:29:36 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/08 17:06:44 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/08 21:16:05 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -425,15 +425,104 @@ int test_strdup()
 	return (1);
 }
 
-// void test_strjoin()
-// {
-//     printf("\n--- Testing ft_strjoin ---\n");
-//     char *s1 = "Hello, ";
-//     char *s2 = "World!";
-//     char *result = ft_strjoin(s1, s2);
-//     printf("Result: %s (Expected: Hello, World!)\n", result);
-//     free(result);
-// }
+int test_substr()
+{
+	char	*ft_result;
+	char	*exp_result;
+
+	printf("\n--- Testing ft_substr ---\n");
+	ft_result = ft_substr("Hello, World!", 0, 5);
+	exp_result = "Hello";
+	if (strcmp(exp_result, ft_result) != 0)
+		printf("❌ failed! Expected %s, got %s\n", exp_result, ft_result);
+	ft_result = ft_substr("Hello, World!", 7, 6);
+	exp_result = "World!";
+	if (strcmp(exp_result, ft_result) != 0)
+		printf("❌ failed! Expected %s, got %s\n", exp_result, ft_result);
+	ft_result = ft_substr("Hello, World!", 12, 6);
+	exp_result = "!";
+	if (strcmp(exp_result, ft_result) != 0)
+		printf("❌ Unexpected behaviour failed! Expected %s, got %s\n", exp_result, ft_result);
+	return (1);
+}
+
+void test_strjoin()
+{
+	char	*ft_result;
+	char	*exp_result;
+
+	printf("\n--- Testing ft_strjoin ---\n");
+	ft_result = ft_strjoin("", "");
+	exp_result = "";
+	if (strcmp(exp_result, ft_result) != 0)
+		printf("❌ Empty strings failed! Expected %s, got %s\n", exp_result, ft_result);
+	ft_result = ft_strjoin("Hello,", "");
+	exp_result = "Hello,";
+	if (strcmp(exp_result, ft_result) != 0)
+		printf("❌ failed! Expected %s, got %s\n", exp_result, ft_result);
+	ft_result = ft_strjoin("", "World!");
+	exp_result = "World!";
+	if (strcmp(exp_result, ft_result) != 0)
+		printf("❌ failed! Expected %s, got %s\n", exp_result, ft_result);
+	ft_result = ft_strjoin("Hello,", " World!");
+	exp_result = "Hello, World!";
+	if (strcmp(exp_result, ft_result) != 0)
+		printf("❌ failed! Expected %s, got %s\n", exp_result, ft_result);
+}
+
+void test_strtrim()
+{
+	char	*ft_result;
+	char	*exp_result;
+
+	printf("\n--- Testing ft_strtrim ---\n");
+	ft_result = ft_strtrim("", "");
+	exp_result = "";
+	if (strcmp(exp_result, ft_result) != 0)
+		printf("❌ Empty strings failed! Expected %s, got %s\n", exp_result, ft_result);
+	ft_result = ft_strtrim("Hello,", "");
+	exp_result = "Hello,";
+	if (strcmp(exp_result, ft_result) != 0)
+		printf("❌ failed! Expected %s, got %s\n", exp_result, ft_result);
+	ft_result = ft_strtrim("  Hello, World!  ", " ");
+	exp_result = "Hello, World!";
+	if (strcmp(exp_result, ft_result) != 0)
+		printf("❌ failed! Expected %s, got %s\n", exp_result, ft_result);
+	ft_result = ft_strtrim("\n  ,Hello, World!  ", " \n,");
+	exp_result = "Hello, World!";
+	if (strcmp(exp_result, ft_result) != 0)
+		printf("❌ failed! Expected %s, got %s\n", exp_result, ft_result);
+}
+
+size_t	get_size(char **array)
+{
+    size_t	size;
+	
+	size = 0;
+    while (array[size] != NULL) {
+        size++;
+    }
+    return size;
+}
+
+void test_split()
+{
+	char	**ft_result;
+
+	printf("\n--- Testing ft_split---\n");
+	ft_result = ft_split("Hello", ' ');
+	printf("Expected size = 1 and string 'Hello', actual size = %lu '%s' '%s'\n", get_size(ft_result), ft_result[0], ft_result[1]);
+	ft_result = ft_split("Hello,World", ',');
+	printf("Expected size = 2 and strings 'Hello' 'World', actual size = %lu '%s' '%s' '%s'\n", get_size(ft_result), ft_result[0], ft_result[1], ft_result[2]);
+	ft_result = ft_split("   Hello", ' ');
+	printf("Expected size = 1 and string 'Hello', actual size = %lu '%s' '%s'\n", get_size(ft_result), ft_result[0], ft_result[1]);
+	ft_result = ft_split("    Hello   ", ' ');
+	printf("Expected size = 1 and string 'Hello', actual size = %lu '%s' '%s'\n", get_size(ft_result), ft_result[0], ft_result[1]);
+	ft_result = ft_split(",,, Hello ,, WORLD!!!,,,!", ',');
+	printf("Expected size = 3 and string ' Hello ' ' WORLD!!!' '!', actual size = %lu '%s' '%s' '%s' '%s'\n", get_size(ft_result), ft_result[0], ft_result[1], ft_result[2], ft_result[3]);
+	ft_result = ft_split(" ", ' ');
+	printf("Expected size = 1 and string '', actual size = %lu '%s' '%s'\n", get_size(ft_result), ft_result[0], ft_result[1]);
+}
 
 // void test_putstr_fd()
 // {
@@ -470,8 +559,11 @@ int	main(void)
 	
 	test_calloc();
 	test_strdup();
+	test_substr();
+	test_strjoin();
+	test_strtrim();
+	test_split();
 // test_strjoin();
-// test_memset();
 // test_putstr_fd();
 	printf("\n==== Tests Completed! ====\n");
 	return (0);
