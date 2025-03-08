@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 10:29:36 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/07 21:40:53 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/08 17:06:44 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <ctype.h>
 #include "libft.h"
 
-// gcc main.c -L. -lft -o test && ./test
+// cc main.c -L. -lft -o test && ./test
 // Suppress warnings for suspicious memset and bzero calls
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wmemset-transposed-args"
@@ -383,14 +383,47 @@ void test_atoi()
 	if (exp_result != ft_result)
 		printf("❌ failed! Expected %d, got %d\n", exp_result, ft_result);
 }
-// void test_strdup()
-// {
-//     printf("\n--- Testing ft_strdup ---\n");
-//     char *s1 = "Libft Test";
-//     char *dup = ft_strdup(s1);
-//     printf("Original: %s | Duplicated: %s\n", s1, dup);
-//     free(dup);
-// }
+
+void test_calloc()
+{
+	int		*src_arr;
+	int		*arr;
+	int		size;
+
+	printf("\n--- Testing ft_calloc ---\n");
+	printf("Testing nmemb = 0 %p\n", ft_calloc(0, 5));
+	printf("Testing  size = 0 %p\n", ft_calloc(5, 0));
+	size = 10;
+	arr = (int *)ft_calloc(size, sizeof(int));
+	src_arr = arr + size;
+	*src_arr = 55;
+	while (size + 1 > 0)
+	{
+		if (size == 0)
+			printf("%d\n", *(int *) arr);
+		else
+			printf("%d, ", *(int *) arr);
+		arr++;
+		size--;
+	}
+}
+
+int test_strdup()
+{
+	char	*ft_result;
+	char	*exp_result;
+
+	printf("\n--- Testing ft_strdup ---\n");
+	exp_result = strdup("");
+	ft_result = ft_strdup("");
+	if (strcmp(exp_result, ft_result) != 0)
+		printf("❌ Empty string failed! Expected %s, got %s\n", exp_result, ft_result);
+	exp_result = strdup("Hello, World!");
+	ft_result = ft_strdup("Hello, World!");
+	if (strcmp(exp_result, ft_result) != 0)
+		printf("❌ 'Hello, World!' failed! Expected %s, got %s\n", exp_result, ft_result);
+	return (1);
+}
 
 // void test_strjoin()
 // {
@@ -434,7 +467,9 @@ int	main(void)
 	test_strncmp();
 	test_strnstr();
 	test_atoi();
-// test_strdup();
+	
+	test_calloc();
+	test_strdup();
 // test_strjoin();
 // test_memset();
 // test_putstr_fd();
