@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 10:29:36 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/09 15:10:30 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/09 23:08:42 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,8 +277,8 @@ int	test_strchr(char *(*ft)(const char *, int), char *(*orig)(const char *, int)
 		printf("❌ '%s' failed! Expected '%s', got '%s'\n", ft_name, exp_result, ft_result);
 	exp_result = (*orig)("", 300);
 	ft_result = (*ft)("", 300);
-		if (exp_result != ft_result)
-			printf("❌ '%s' failed! Expected '%s', got '%s'\n", ft_name, exp_result, ft_result);
+	if (exp_result != ft_result)
+		printf("❌ '%s' failed! Expected '%s', got '%s'\n", ft_name, exp_result, ft_result);
 	return (1);
 }
 
