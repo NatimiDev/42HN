@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:55:44 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/07 21:16:13 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/09 17:00:18 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ int	ft_compare(const char *str, const char *to_find)
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	while (len > 0)
+	if (*needle == '\0')
+		return ((char *) haystack);
+	while (*haystack && len > 0)
 	{
 		if (ft_compare(haystack, needle))
 			return ((char *) haystack);
