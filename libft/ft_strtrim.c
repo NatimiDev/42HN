@@ -6,14 +6,14 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 18:06:05 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/08 20:01:00 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/09 14:36:27 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-int		is_in_charset(char const c, char const *set)
+int	is_in_charset(char const c, char const *set)
 {
 	while (*set)
 	{

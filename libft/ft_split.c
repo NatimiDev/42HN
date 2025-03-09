@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 20:02:19 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/08 21:16:58 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/09 14:21:43 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	**ft_split(char const *s, char c)
 	char	**res;
 
 	n_splits = count_splits(s, c);
-	res = malloc(sizeof(char *) * (n_splits + 1));
+	res = (char **)malloc(sizeof(char *) * (n_splits + 1));
 	if (!res)
 		return (NULL);
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 21:25:10 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/08 17:40:08 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/09 14:20:22 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strdup(const char *s1)
 	int		size;
 
 	size = ft_strlen(s1) + 1;
-	dst = malloc(sizeof(char) * (size));
+	dst = (char *)malloc(sizeof(char) * (size));
 	if (dst == NULL)
 		return (NULL);
 	ft_strlcpy(dst, s1, size);

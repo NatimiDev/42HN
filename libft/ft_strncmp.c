@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:38:59 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/07 20:46:36 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/09 14:35:57 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	while (n > 0)
 	{
 		if (*s1 != *s2)
-			return(*s1 - *s2);
+			return (*s1 - *s2);
 		s1++;
 		s2++;
 		n--;

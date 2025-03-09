@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 21:26:01 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/07 21:39:08 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/09 14:33:55 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_atoi(const char *str)
 {
-	int	sign;
-	int	number;
+	int				sign;
+	unsigned int	number;
 
 	sign = 1;
 	number = 0;
