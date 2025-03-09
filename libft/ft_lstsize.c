@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 17:41:47 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/09 17:45:17 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/09 23:04:49 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_lstsize(t_list *lst)
 	int	l;
 
 	l = 0;
-	while(lst)
+	while (lst)
 	{
 		lst = lst->next;
 		l++;

@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 17:33:01 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/09 21:36:18 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/09 23:04:18 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,5 @@ t_list	*ft_lstnew(void *content)
 		return (NULL);
 	new_node->content = content;
 	new_node->next = NULL;
-
 	return (new_node);
 }

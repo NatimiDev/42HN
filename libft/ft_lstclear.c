@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 20:40:45 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/09 22:52:37 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/09 23:05:12 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	ft_lstclear(t_list **lst, void (*del)(void	*))
 {
 	t_list	*tmp;
 	t_list	*node_to_del;
-	
+
 	if (!lst || !del)
-		return;
+		return ;
 	tmp = *lst;
 	while (tmp)
 	{
