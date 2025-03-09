@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 10:29:36 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/09 14:25:58 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/09 15:10:30 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -575,6 +575,51 @@ void test_itoa()
 		printf("❌ failed! Expected '%s', got '%s'\n", exp_result, ft_result);
 }
 
+char	add_idx(unsigned int idx, char	c)
+{
+	return (c + idx);
+}
+
+void test_strmapi()
+{
+	char	*ft_result;
+	char	*exp_result;
+
+	printf("\n--- Testing test_strmapi ---\n");
+	ft_result = ft_strmapi("", add_idx);
+	exp_result = "";
+	if (strcmp(exp_result, ft_result) != 0)
+		printf("❌ Empty strings failed! Expected '%s', got '%s'\n", exp_result, ft_result);
+	ft_result = ft_strmapi("Hello", add_idx);
+	exp_result = "Hfnos";
+	if (strcmp(exp_result, ft_result) != 0)
+		printf("❌ Empty strings failed! Expected '%s', got '%s'\n", exp_result, ft_result);
+	
+}
+
+void	add_idxiteri(unsigned int idx, char* c)
+{
+	*c += idx;
+}
+
+void test_striteri()
+{
+	char	ft_result[] = "";
+	char	ft_result1[] = "Hello";
+	char	*exp_result;
+
+	printf("\n--- Testing test_striteri ---\n");
+	ft_striteri(ft_result, add_idxiteri);
+	exp_result = "";
+	if (strcmp(exp_result, ft_result) != 0)
+		printf("❌ Empty strings failed! Expected '%s', got '%s'\n", exp_result, ft_result);
+	ft_striteri(ft_result1, add_idxiteri);
+	exp_result = "Hfnos";
+	if (strcmp(exp_result, ft_result1) != 0)
+		printf("❌ Empty strings failed! Expected '%s', got '%s'\n", exp_result, ft_result1);
+	
+}
+
 // void test_putstr_fd()
 // {
 //     printf("\n--- Testing ft_putstr_fd ---\n");
@@ -615,6 +660,8 @@ int	main(void)
 	test_strtrim();
 	test_split();
 	test_itoa();
+	test_strmapi();
+	test_striteri();
 // test_putstr_fd();
 	printf("\n==== Tests Completed! ====\n");
 	return (0);
