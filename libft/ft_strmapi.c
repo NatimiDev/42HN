@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 14:40:21 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/09 14:49:00 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/10 14:47:13 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 		res[i] = (*f)(i, s[i]);
 		i++;
 	}
+	res[i] = '\0';
 	return (res);
 }
