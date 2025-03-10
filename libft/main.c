@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 10:29:36 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/09 23:08:42 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/10 17:21:09 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <ctype.h>
 #include "libft.h"
 
-// cc main.c -L. -lft -o test && ./test
+// cc -Wall -Werror -Wextra main.c -L. -lft -o test && ./test
 // Suppress warnings for suspicious memset and bzero calls
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wmemset-transposed-args"
@@ -23,9 +23,9 @@
 
 int	test_char(int (*ft)(int), int (*orig)(int), char *ft_name)
 {
-	unsigned char	c;
-	int				ft_result;
-	int				exp_result;
+	int	c;
+	int	ft_result;
+	int	exp_result;
 
 	printf("\n--- Testing '%s' ---\n", ft_name);
 	c = 0;
@@ -46,7 +46,6 @@ int	test_char(int (*ft)(int), int (*orig)(int), char *ft_name)
 
 int	test_bzero(void)
 {
-	int		i;
 	int		arr1[5] = {1, 2, 3, 4, 5};
 	int		arr2[5] = {1, 2, 3, 4, 5};
 	char 	arr3[13] = "Hello, World!";
@@ -74,7 +73,6 @@ int	test_bzero(void)
 	
 int	test_memset(void *(*ft)(void *, int, size_t), void *(*orig)(void *, int, size_t), char *ft_name)
 {
-	int		i;
 	int		arr1[5] = {1, 2, 3, 4, 5};
 	int		arr2[5] = {1, 2, 3, 4, 5};
 	char 	arr3[13] = "Hello, World!";
@@ -100,7 +98,6 @@ int	test_memset(void *(*ft)(void *, int, size_t), void *(*orig)(void *, int, siz
 
 int	test_mem(void *(*ft)(void *, const void *, size_t), void *(*orig)(void *, const void *, size_t), char *ft_name)
 {
-	int		i;
 	int		src_arr[5] = {1, 2, 3, 4, 5};
 	int		dst_arr1[5];
 	int		dst_arr2[5];
@@ -136,11 +133,9 @@ int	test_mem(void *(*ft)(void *, const void *, size_t), void *(*orig)(void *, co
 
 int	test_memchr(void *(*ft)(const void *, int, size_t), void *(*orig)(const void *, int, size_t), char *ft_name)
 {
-	int		i;
 	void	*ft_result;
 	void	*exp_result;
 	char 	src[14] = "Hello, World!";
-	char 	src1[14] = "1zzzzzzzz";
 
 	printf("\n--- Testing '%s' ---\n", ft_name);
 	printf("Testing string...\n");
@@ -157,7 +152,6 @@ int	test_memchr(void *(*ft)(const void *, int, size_t), void *(*orig)(const void
 
 int	test_memcmp()
 {
-	int		i;
 	int		ft_result;
 	int		exp_result;
 	char 	*str;
@@ -228,9 +222,9 @@ int	test_strl(size_t (*ft)(char *, const char *, size_t), size_t (*orig)(char *,
 {
 	size_t	ft_result;
 	size_t	exp_result;
-	char 	src[13] = "Hello, World!";
-	char	dst1[20];
-	char	dst2[20];
+	char 	src[] = "Hello, World!";
+	char	dst1[20] = {0};
+	char	dst2[20] = {0};
 	char	dst3[25] = "42";
 	char	dst4[25] = "42";
 
@@ -284,7 +278,6 @@ int	test_strchr(char *(*ft)(const char *, int), char *(*orig)(const char *, int)
 
 int	test_strncmp()
 {
-	int		i;
 	int		ft_result;
 	int		exp_result;
 	char 	*str;
@@ -389,26 +382,26 @@ void test_atoi()
 
 void test_calloc()
 {
-	int		*src_arr;
-	int		*arr;
+	int		*orig_arr;
+	int		*iter;
 	int		size;
+	int		*ft_res;
 
 	printf("\n--- Testing ft_calloc ---\n");
-	printf("Testing nmemb = 0 %p\n", ft_calloc(0, 5));
-	printf("Testing  size = 0 %p\n", ft_calloc(5, 0));
+	printf("Testing nmemb = 0 %p\n", ft_res = ft_calloc(0, 5));
+	free (ft_res);
+	printf("Testing  size = 0 %p\n", ft_res = ft_calloc(5, 0));
+	free (ft_res);
 	size = 10;
-	arr = (int *)ft_calloc(size, sizeof(int));
-	src_arr = arr + size;
-	*src_arr = 55;
-	while (size + 1 > 0)
+	orig_arr = (int *)ft_calloc(size, sizeof(int));
+	iter = orig_arr;
+	while (size > 0)
 	{
-		if (size == 0)
-			printf("%d\n", *(int *) arr);
-		else
-			printf("%d, ", *(int *) arr);
-		arr++;
+		printf("%d, ", *(int *) iter);
+		iter++;
 		size--;
 	}
+	free (orig_arr);
 }
 
 int test_strdup()
@@ -421,10 +414,14 @@ int test_strdup()
 	ft_result = ft_strdup("");
 	if (strcmp(exp_result, ft_result) != 0)
 		printf("❌ Empty string failed! Expected '%s', got '%s'\n", exp_result, ft_result);
+	free (exp_result);
+	free (ft_result);
 	exp_result = strdup("Hello, World!");
 	ft_result = ft_strdup("Hello, World!");
 	if (strcmp(exp_result, ft_result) != 0)
 		printf("❌ 'Hello, World!' failed! Expected '%s', got '%s'\n", exp_result, ft_result);
+	free (exp_result);
+	free (ft_result);
 	return (1);
 }
 
@@ -438,14 +435,17 @@ int test_substr()
 	exp_result = "Hello";
 	if (strcmp(exp_result, ft_result) != 0)
 		printf("❌ failed! Expected '%s', got '%s'\n", exp_result, ft_result);
+	free (ft_result);
 	ft_result = ft_substr("Hello, World!", 7, 6);
 	exp_result = "World!";
 	if (strcmp(exp_result, ft_result) != 0)
 		printf("❌ failed! Expected '%s', got '%s'\n", exp_result, ft_result);
+	free (ft_result);
 	ft_result = ft_substr("Hello, World!", 12, 6);
 	exp_result = "!";
 	if (strcmp(exp_result, ft_result) != 0)
 		printf("❌ Unexpected behaviour failed! Expected '%s', got '%s'\n", exp_result, ft_result);
+	free (ft_result);
 	return (1);
 }
 
@@ -459,18 +459,22 @@ void test_strjoin()
 	exp_result = "";
 	if (strcmp(exp_result, ft_result) != 0)
 		printf("❌ Empty strings failed! Expected '%s', got '%s'\n", exp_result, ft_result);
+	free(ft_result);
 	ft_result = ft_strjoin("Hello,", "");
 	exp_result = "Hello,";
 	if (strcmp(exp_result, ft_result) != 0)
 		printf("❌ failed! Expected '%s', got '%s'\n", exp_result, ft_result);
+	free(ft_result);
 	ft_result = ft_strjoin("", "World!");
 	exp_result = "World!";
 	if (strcmp(exp_result, ft_result) != 0)
 		printf("❌ failed! Expected '%s', got '%s'\n", exp_result, ft_result);
+	free(ft_result);
 	ft_result = ft_strjoin("Hello,", " World!");
 	exp_result = "Hello, World!";
 	if (strcmp(exp_result, ft_result) != 0)
 		printf("❌ failed! Expected '%s', got '%s'\n", exp_result, ft_result);
+	free(ft_result);
 }
 
 void test_strtrim()
@@ -483,18 +487,22 @@ void test_strtrim()
 	exp_result = "";
 	if (strcmp(exp_result, ft_result) != 0)
 		printf("❌ Empty strings failed! Expected '%s', got '%s'\n", exp_result, ft_result);
+	free (ft_result);
 	ft_result = ft_strtrim("Hello,", "");
 	exp_result = "Hello,";
 	if (strcmp(exp_result, ft_result) != 0)
 		printf("❌ failed! Expected '%s', got '%s'\n", exp_result, ft_result);
+	free (ft_result);
 	ft_result = ft_strtrim("  Hello, World!  ", " ");
 	exp_result = "Hello, World!";
 	if (strcmp(exp_result, ft_result) != 0)
 		printf("❌ failed! Expected '%s', got '%s'\n", exp_result, ft_result);
+	free (ft_result);
 	ft_result = ft_strtrim("\n  ,Hello, World!  ", " \n,");
 	exp_result = "Hello, World!";
 	if (strcmp(exp_result, ft_result) != 0)
 		printf("❌ failed! Expected '%s', got '%s'\n", exp_result, ft_result);
+	free (ft_result);
 }
 
 size_t	get_size(char **array)
@@ -508,6 +516,19 @@ size_t	get_size(char **array)
     return size;
 }
 
+void free_arr(char **arr)
+{
+	int i;
+
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+}
+
 void test_split()
 {
 	char	**ft_result;
@@ -515,16 +536,22 @@ void test_split()
 	printf("\n--- Testing ft_split ---\n");
 	ft_result = ft_split("Hello", ' ');
 	printf("Expected size = 1 and string 'Hello', actual size = %lu '%s' '%s'\n", get_size(ft_result), ft_result[0], ft_result[1]);
+	free_arr(ft_result);
 	ft_result = ft_split("Hello,World", ',');
 	printf("Expected size = 2 and strings 'Hello' 'World', actual size = %lu '%s' '%s' '%s'\n", get_size(ft_result), ft_result[0], ft_result[1], ft_result[2]);
+	free_arr(ft_result);
 	ft_result = ft_split("   Hello", ' ');
 	printf("Expected size = 1 and string 'Hello', actual size = %lu '%s' '%s'\n", get_size(ft_result), ft_result[0], ft_result[1]);
+	free_arr(ft_result);
 	ft_result = ft_split("    Hello   ", ' ');
 	printf("Expected size = 1 and string 'Hello', actual size = %lu '%s' '%s'\n", get_size(ft_result), ft_result[0], ft_result[1]);
+	free_arr(ft_result);
 	ft_result = ft_split(",,, Hello ,, WORLD!!!,,,!", ',');
 	printf("Expected size = 3 and string ' Hello ' ' WORLD!!!' '!', actual size = %lu '%s' '%s' '%s' '%s'\n", get_size(ft_result), ft_result[0], ft_result[1], ft_result[2], ft_result[3]);
-	ft_result = ft_split(" ", ' ');
-	printf("Expected size = 1 and string ', actual size = %lu '%s' '%s'\n", get_size(ft_result), ft_result[0], ft_result[1]);
+	free_arr(ft_result);
+	ft_result = ft_split(" ", ',');
+	printf("Expected size = 1 and string ' ', actual size = %lu '%s' '%s'\n", get_size(ft_result), ft_result[0], ft_result[1]);
+	free_arr(ft_result);
 }
 
 void test_itoa()
@@ -537,42 +564,52 @@ void test_itoa()
 	exp_result = "0";
 	if (strcmp(ft_result, exp_result) != 0)
 		printf("❌ failed! Expected '%s', got '%s'\n", exp_result, ft_result);
+	free (ft_result);
 	ft_result = ft_itoa(1);
 	exp_result = "1";
 	if (strcmp(ft_result, exp_result) != 0)
 		printf("❌ failed! Expected '%s', got '%s'\n", exp_result, ft_result);
+	free (ft_result);
 	ft_result = ft_itoa(10);
 	exp_result = "10";
 	if (strcmp(ft_result, exp_result) != 0)
 		printf("❌ failed! Expected '%s', got '%s'\n", exp_result, ft_result);
+	free (ft_result);
 	ft_result = ft_itoa(99);
 	exp_result = "99";
 	if (strcmp(ft_result, exp_result) != 0)
 		printf("❌ failed! Expected '%s', got '%s'\n", exp_result, ft_result);
+	free (ft_result);
 	ft_result = ft_itoa(100);
 	exp_result = "100";
 	if (strcmp(ft_result, exp_result) != 0)
 		printf("❌ failed! Expected '%s', got '%s'\n", exp_result, ft_result);
+	free (ft_result);
 	ft_result = ft_itoa(-555);
 	exp_result = "-555";
 	if (strcmp(ft_result, exp_result) != 0)
 		printf("❌ failed! Expected '%s', got '%s'\n", exp_result, ft_result);
+	free (ft_result);
 	ft_result = ft_itoa(999);
 	exp_result = "999";
 	if (strcmp(ft_result, exp_result) != 0)
 		printf("❌ failed! Expected '%s', got '%s'\n", exp_result, ft_result);
+	free (ft_result);
 	ft_result = ft_itoa(-1000);
 	exp_result = "-1000";
 	if (strcmp(ft_result, exp_result) != 0)
 		printf("❌ failed! Expected '%s', got '%s'\n", exp_result, ft_result);
+	free (ft_result);
 	ft_result = ft_itoa(2147483647);
 	exp_result = "2147483647";
 	if (strcmp(ft_result, exp_result) != 0)
 		printf("❌ failed! Expected '%s', got '%s'\n", exp_result, ft_result);
+	free (ft_result);
 	ft_result = ft_itoa(-2147483648);
 	exp_result = "-2147483648";
 	if (strcmp(ft_result, exp_result) != 0)
 		printf("❌ failed! Expected '%s', got '%s'\n", exp_result, ft_result);
+	free (ft_result);
 }
 
 char	add_idx(unsigned int idx, char	c)
@@ -590,10 +627,12 @@ void test_strmapi()
 	exp_result = "";
 	if (strcmp(exp_result, ft_result) != 0)
 		printf("❌ Empty strings failed! Expected '%s', got '%s'\n", exp_result, ft_result);
+	free(ft_result);
 	ft_result = ft_strmapi("Hello", add_idx);
 	exp_result = "Hfnos";
 	if (strcmp(exp_result, ft_result) != 0)
 		printf("❌ Empty strings failed! Expected '%s', got '%s'\n", exp_result, ft_result);
+	free(ft_result);
 	
 }
 
@@ -662,7 +701,6 @@ int	main(void)
 	test_itoa();
 	test_strmapi();
 	test_striteri();
-// test_putstr_fd();
 	printf("\n==== Tests Completed! ====\n");
 	return (0);
 }

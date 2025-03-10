@@ -6,6 +6,7 @@
 #include <errno.h>
 #include <unistd.h>
 #include "libft.h"
+// #include <bsd/string.h>
 
 int	min(int a, int b) {
 	return ((a < b) ? a : b);

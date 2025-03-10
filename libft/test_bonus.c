@@ -65,7 +65,6 @@ int	compare_list(char const *fct, t_list *list, char **strs, int limit, int leng
 int main(int argc, char const *argv[])
 {
 	int		i;
-	int		correct;
 	char	*strs[3];
 	char	*upper[3];
 
@@ -174,5 +173,8 @@ int main(int argc, char const *argv[])
 	ft_lstmap(empty, &upper_lst, NULL); NBR(7)
 	ft_lstmap(empty, &upper_lst, &free); DONE
 
+	free(upper[0]);
+	free(upper[1]);
+	free(upper[2]);
 	return (0);
 }
