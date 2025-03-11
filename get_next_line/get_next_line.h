@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 18:19:33 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/11 20:24:22 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/11 23:13:28 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,17 @@
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
-#elif BUFFER_SIZE < 0
+# elif BUFFER_SIZE < 0
 #  undef BUFFER_SIZE
 #  define BUFFER_SIZE 0
-#endif
+# endif
 
-#include <stdlib.h>
+# include <stdlib.h>
 
 char	*get_next_line(int fd);
-int		find_EOL(char *s, int start);
+int		read_next_block(int fd, char *buffer);
+char	*join_and_free(char *s, char *buffer, int start, int end);
+int		find_eol(char *s, int start);
 int		ft_strlen(const char *s);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char	*ft_strljoin(char const *s1, char const *s2, int l);

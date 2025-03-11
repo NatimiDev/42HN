@@ -6,20 +6,20 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 18:19:28 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/10 21:05:44 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/11 22:53:38 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int		find_EOL(char *s, int start)
+int	find_eol(char *s, int start)
 {
-	int i;
+	int	i;
 
-	if(!s)
+	if (!s)
 		return (-2);
 	i = start;
-	while(s[i])
+	while (s[i])
 	{
 		if (s[i] == '\n')
 			return (i);
