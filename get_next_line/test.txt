@@ -1,0 +1,6 @@
+This is the first line.
+Here's the second line.
+Line three has some numbers: 12345
+Fourth line with special characters: !@#$%
+This is the fifth line, almost done.
+Finally, the sixth line concludes the text.
