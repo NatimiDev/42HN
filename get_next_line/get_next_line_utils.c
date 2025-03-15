@@ -6,49 +6,34 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 18:19:28 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/11 22:53:38 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/15 18:09:28 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <string.h>
 #include "get_next_line.h"
-
-int	find_eol(char *s, int start)
-{
-	int	i;
-
-	if (!s)
-		return (-2);
-	i = start;
-	while (s[i])
-	{
-		if (s[i] == '\n')
-			return (i);
-		i++;
-	}
-	return (-1);
-}
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	size_t	src_len;
+	size_t	i;
 
-	src_len = ft_strlen(src);
-	while (dstsize > 1)
+	if (!dst || !src)
+		return (0);
+	i = 0;
+	while (src[i] && i + 1 < dstsize)
 	{
-		*dst = *src;
-		dst++;
-		src++;
-		dstsize--;
+		dst[i] = src[i];
+		i++;
 	}
-	if (dstsize != 0)
-		*dst = '\0';
-	return (src_len);
+	if (dstsize > 0)
+		dst[i] = '\0';
+	return (ft_strlen(src));
 }
 
-char	*ft_strljoin(char const *s1, char const *s2, int l)
+char	*ft_strljoin(char const *s1, char const *s2, size_t l)
 {
 	char	*res;
-	int		len1;
+	size_t	len1;
 
 	len1 = ft_strlen(s1);
 	res = (char *)malloc(sizeof(char) * (len1 + l + 1));
@@ -69,4 +54,18 @@ int	ft_strlen(const char *s)
 	while (s[len])
 		len++;
 	return (len);
+}
+
+void	*ft_memset(void *b, int c, size_t len)
+{
+	unsigned char	*cu;
+
+	cu = (unsigned char *) b;
+	while (len > 0)
+	{
+		*cu = (unsigned char) c;
+		cu++;
+		len--;
+	}
+	return (b);
 }

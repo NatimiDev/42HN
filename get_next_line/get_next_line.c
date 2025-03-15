@@ -6,30 +6,62 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 18:19:31 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/11 23:09:38 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/15 18:08:58 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "get_next_line.h"
 
-int	read_next_block(int fd, char *buffer)
+ssize_t	find_eol(char *s, size_t start)
 {
-	int	eof;
+	ssize_t	i;
 
-	eof = read(fd, buffer, BUFFER_SIZE);
-	buffer[eof] = '\0';
-	return (eof);
+	if (!s)
+		return (-2);
+	i = start;
+	while (s[i])
+	{
+		if (s[i] == '\n')
+			return (i);
+		i++;
+	}
+	return (-1);
 }
 
-char	*join_and_free(char *s, char *buffer, int start, int end)
+ssize_t	read_next_block(int fd, char *buffer)
+{
+	ssize_t	bytes_read;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+	{
+		ft_memset(buffer, '\0', BUFFER_SIZE);
+		return (0);
+	}
+	bytes_read = read(fd, buffer, BUFFER_SIZE);
+	if (bytes_read >= 0)
+		buffer[bytes_read] = '\0';
+	else
+		ft_memset(buffer, '\0', BUFFER_SIZE);
+	return (bytes_read);
+}
+
+char	*join_and_free(char *s, char *buffer, size_t start, size_t end)
 {
 	char	*res;
 
-	res = ft_strljoin(s, &buffer[start + 1], end - start);
+	if (!buffer || !buffer[start])
+		return (s);
+	res = ft_strljoin(s, &buffer[start], end - start);
 	if (s)
 		free(s);
 	return (res);
+}
+
+char	*ft_free(char *str)
+{
+	if (str)
+		free(str);
+	return (NULL);
 }
 
 char	*get_next_line(int fd)
@@ -38,25 +70,24 @@ char	*get_next_line(int fd)
 	char		*next_line;
 	int			eol;
 	int static	last_eol;
-	int static	eof;
+	ssize_t		bytes_read;
 
-	if (!*buffer)
-	{
-		last_eol = -1;
-		eof = read_next_block(fd, buffer);
-	}
-	if (eof == 0 || fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
+	if (!*buffer)
+		bytes_read = read_next_block(fd, buffer);
 	next_line = NULL;
-	while (find_eol(buffer, last_eol + 1) == -1 && eof != 0)
+	while (find_eol(buffer, last_eol) == -1 && bytes_read > 0)
 	{
 		next_line = join_and_free(next_line, buffer, last_eol,
 				ft_strlen(buffer));
-		eof = read_next_block(fd, buffer);
-		last_eol = -1;
+		bytes_read = read_next_block(fd, buffer);
+		last_eol = 0;
+		if (bytes_read < 0)
+			return (ft_free(next_line));
 	}
-	eol = find_eol(buffer, last_eol + 1);
-	next_line = join_and_free(next_line, buffer, last_eol, eol);
-	last_eol = eol;
+	eol = find_eol(buffer, last_eol);
+	next_line = join_and_free(next_line, buffer, last_eol, eol + 1);
+	last_eol = eol + 1;
 	return (next_line);
 }

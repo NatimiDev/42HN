@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 18:22:37 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/11 23:15:00 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/15 19:12:36 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,26 @@
 #include <stdio.h>
 #include "get_next_line.h"
 
-// cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 main.c get_next_line.c get_next_line_utils.c 
+/* cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 main.c get_next_line.c 
+get_next_line_utils.c && ./a.out */
 int	main(void)
 {
 	int		fd;
 	char	*next_line;
+	int		n_line;
 
-	fd = open("test.txt", O_RDONLY);
+	n_line = 0;
+	fd = open("limits.txt", O_RDONLY);
+	printf("fd = %d\n", fd);
 	next_line = get_next_line(fd);
 	while (next_line)
 	{
-		printf("%s", next_line);
+		printf("%d:%s", n_line, next_line);
 		free(next_line);
 		next_line = get_next_line(fd);
+		n_line++;
 	}
 	close(fd);
+	printf("fd = %d\n", fd);
 	return (0);
 }
