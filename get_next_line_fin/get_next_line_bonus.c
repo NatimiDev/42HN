@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "get_next_line_bonus.h"
 
 ssize_t	read_next_block(int fd, char **buffer, size_t *last_eol)
@@ -48,6 +47,10 @@ char	*join_and_free(char *s, t_buffer *buffer, ssize_t end)
 	}
 	if (s)
 		free(s);
+	if (!res)
+	{
+		buffer->content = ft_free(&buffer->content);
+	}
 	return (res);
 }
 
