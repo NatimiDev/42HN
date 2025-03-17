@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 18:19:28 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/16 18:25:14 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/17 12:17:17 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,20 @@ void	*ft_memset(void *b, int c, size_t len)
 		len--;
 	}
 	return (b);
+}
+
+ssize_t	find_eol(char *s, size_t start)
+{
+	ssize_t	i;
+
+	if (!s)
+		return (-1);
+	i = start;
+	while (s[i])
+	{
+		if (s[i] == '\n')
+			return (i);
+		i++;
+	}
+	return (-1);
 }
