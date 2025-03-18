@@ -6,42 +6,63 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 23:04:57 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/17 23:20:01 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/18 18:25:46 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "ft_printf.h"
 
-void	ft_putchar_fd(char c, int fd)
+int	ft_putchar(char c)
 {
-	write(fd, &c, 1);
+	write(1, &c, 1);
+	return (1);
 }
 
-void	ft_putstr_fd(char *s, int fd)
+int	ft_putstr(char *s)
 {
+	int	count;
+
+	count = 0;
 	if (!s)
-		return ;
+	{
+		return (ft_putstr("(null)"));
+	}
 	while (*s)
 	{
-		ft_putchar_fd(*s, fd);
+		count += ft_putchar(*s);
 		s++;
 	}
+	return (count);
 }
 
-void	ft_putnbr_fd(int n, int fd)
+int	ft_putnbr(int n)
 {
+	int len;
+
+	len = 0;
 	if (n == -2147483648)
-	{
-		ft_putstr_fd("-2147483648", fd);
-		return ;
-	}
+		return (ft_putstr("-2147483648"));
 	if (n < 0)
 	{
-		ft_putchar_fd('-', fd);
+		len += ft_putchar('-');
 		n *= -1;
 	}
 	if (n > 9)
-		ft_putnbr_fd(n / 10, fd);
-	ft_putchar_fd('0' + n % 10, fd);
+		len += ft_putnbr(n / 10);
+	len += ft_putchar('0' + n % 10);
+	return (len);
+}
+
+int	ft_putptr(uintptr_t n)
+{
+	if (n < 0)
+	{
+		ft_putchar('-');
+		n *= -1;
+	}
+	if (n > 9)
+		ft_putnbr(n / 10);
+	ft_putchar('0' + n % 10);
+	return (0);
 }
