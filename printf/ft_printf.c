@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 22:52:55 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/18 18:14:31 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/18 18:30:26 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	ft_printf(const char *s, ...)
 				count += ft_putchar('%');
 			if (*s == 'd' || *s == 'i')
 				count += ft_putnbr(va_arg(args, int));
+			if (*s == 'u')
+				count += ft_putnbr_u(va_arg(args, unsigned int));
 			else if (*s == 'c')
 				count += ft_putchar((char)va_arg(args, int));
 			else if (*s == 's')

@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 23:04:57 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/18 18:25:46 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/18 18:36:40 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,17 @@ int	ft_putnbr(int n)
 	}
 	if (n > 9)
 		len += ft_putnbr(n / 10);
+	len += ft_putchar('0' + n % 10);
+	return (len);
+}
+
+int	ft_putnbr_u(unsigned int n)
+{
+	int len;
+
+	len = 0;
+	if (n > 9)
+		len += ft_putnbr_u(n / 10);
 	len += ft_putchar('0' + n % 10);
 	return (len);
 }
