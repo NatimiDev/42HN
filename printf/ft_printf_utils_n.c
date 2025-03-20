@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 23:04:57 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/20 19:30:58 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/20 19:43:58 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,31 @@
 
 int	ft_putnbr(int n)
 {
-	int	len;
-	int	count;
+	int	len1;
+	int	len2;
 
-	len = 0;
+	len1 = 0;
 	if (n == -2147483648)
 		return (ft_putstr("-2147483648"));
-	count = 0;
+	len2 = 0;
 	if (n < 0)
 	{
-		count = ft_putchar('-');
+		len2 = ft_putchar('-');
 		n *= -1;
 	}
-	if (count == -1)
+	if (len2 == -1)
 		return (-1);
-	len += count;
-	count = 0;
+	len1 += len2;
+	len2 = 0;
 	if (n > 9)
-		count = ft_putnbr(n / 10);
-	if (count == -1)
+		len2 = ft_putnbr(n / 10);
+	if (len2 == -1)
 		return (-1);
-	len += count;
-	count = 0;
-	count = ft_putchar('0' + n % 10);
-	if (count == -1)
+	len1 += len2;
+	len2 = ft_putchar('0' + n % 10);
+	if (len2 == -1)
 		return (-1);
-	return (len + count);
+	return (len1 + len2);
 }
 
 int	ft_putnbr_u(unsigned int n)
@@ -71,19 +70,19 @@ int	ft_putptr(uintptr_t n)
 	return (len1 + len2);
 }
 
-int	ft_putnbr_hex_uintptr(uintptr_t nbr)
+int	ft_putnbr_hex_uintptr(uintptr_t n)
 {
 	char	*base;
 	int		len1;
 	int		len2;
 
 	base = "0123456789abcdef";
-	if (nbr < 16)
-		return (ft_putchar(base[nbr]));
-	len1 = ft_putnbr_hex_uintptr(nbr / 16);
+	if (n < 16)
+		return (ft_putchar(base[n]));
+	len1 = ft_putnbr_hex_uintptr(n / 16);
 	if (len1 == -1)
 		return (-1);
-	len2 = ft_putnbr_hex_uintptr(nbr % 16);
+	len2 = ft_putnbr_hex_uintptr(n % 16);
 	if (len2 == -1)
 		return (-1);
 	return (len1 + len2);
