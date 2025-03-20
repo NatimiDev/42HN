@@ -6,19 +6,23 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 22:52:55 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/18 18:30:26 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/20 19:29:26 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
-#include <stdio.h>
 #include "ft_printf.h"
 
 int	ft_printf(const char *s, ...)
 {
 	va_list	args;
+	va_list	args2;
 	int		count;
+	int		len;
 
+	va_copy(args2, args);
+	va_start(args2, s);
+	va_end(args2);
 	va_start(args, s);
 	count = 0;
 	while (*s)
@@ -27,20 +31,32 @@ int	ft_printf(const char *s, ...)
 		{
 			s++;
 			if (*s == '%')
-				count += ft_putchar('%');
-			if (*s == 'd' || *s == 'i')
-				count += ft_putnbr(va_arg(args, int));
-			if (*s == 'u')
-				count += ft_putnbr_u(va_arg(args, unsigned int));
+				len = ft_putchar('%');
+			else if (*s == 'd' || *s == 'i')
+				len = ft_putnbr(va_arg(args, int));
+			else if (*s == 'u')
+				len = ft_putnbr_u(va_arg(args, unsigned int));
 			else if (*s == 'c')
-				count += ft_putchar((char)va_arg(args, int));
+				len = ft_putchar((char)va_arg(args, int));
 			else if (*s == 's')
-				count += ft_putstr(va_arg(args, char *));
-			// else if (*s == 'p')
-			// 	count += ft_putptr(va_arg(args, uintptr_t));
+				len = ft_putstr(va_arg(args, char *));
+			else if (*s == 'x' || *s == 'X')
+				len = ft_putnbr_hex(va_arg(args, int), *s);
+			else if (*s == 'p')
+				len = ft_putptr(va_arg(args, uintptr_t));
+			else
+				len = -1;
 		}
+		else if (*s == '%' && !*(s + 1))
+			len = -1;
 		else
-			count += ft_putchar(*s);
+			len = ft_putchar(*s);
+		if (len == -1)
+		{
+			va_end(args);
+			return (-1);
+		}
+		count += len;
 		s++;
 	}
 	va_end(args);

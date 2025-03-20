@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -Werror
 NAME = libftprintf.a
 
 # Source and object files
-SRCS = ft_printf.c ft_printf_utils.c
+SRCS = ft_printf.c ft_printf_utils_str.c ft_printf_utils_n.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
