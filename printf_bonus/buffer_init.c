@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 17:50:16 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/24 19:44:41 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/24 20:15:19 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	fill_buffer(t_buffer *buffer_struct, const char *c, size_t len)
 	while (buffer_struct->last_fill + len >= buffer_struct->size)
 	{
 		if (!duplicate_buffer_size(buffer_struct))
-			return (-1);
+			return (0);
 	}
 	i = 0;
 	while (i < len)
@@ -65,7 +65,7 @@ int	fill_buffer(t_buffer *buffer_struct, const char *c, size_t len)
 		i++;
 	}
 	buffer_struct->last_fill += i;
-	return (buffer_struct->last_fill);
+	return (1);
 }
 
 int	duplicate_buffer_size(t_buffer *buffer)

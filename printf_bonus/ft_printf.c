@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 22:52:55 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/24 19:57:02 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/24 20:17:21 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	process_args(const char *flags, va_list *args)
 	buffer = init_buffer(BUFFER_SIZE);
 	if (!buffer)
 		return (-1);
-	if (parse_type(flags, args, buffer, flag_pos) == -1)
+	if (!parse_type(flags, args, buffer, flag_pos))
 	{
 		free_buffer(buffer);
 		return (-1);
@@ -93,7 +93,7 @@ int	parse_type(const char *flags, va_list *args, t_buffer *buffer,
 				find_sharp(flags, flag_pos), buffer));
 	else if (type_flag == 'p')
 		return (ft_putptr(va_arg(*args, uintptr_t), buffer));
-	return (-1);
+	return (0);
 }
 
 int	manage_flags(const char *flags, int flag_pos, t_buffer *buffer)
