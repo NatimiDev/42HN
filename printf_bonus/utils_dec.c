@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 17:41:49 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/24 00:24:51 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/24 19:41:28 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,16 @@ int	ft_putnbr_u(unsigned int n, t_buffer *buffer_struct)
 	int	len1;
 	int	len2;
 
-	len1 = 0;
 	if (n == 0)
 		buffer_struct->is_null = 1;
 	if (n > 9)
-		len1 += ft_putnbr_u(n / 10, buffer_struct);
-	if (len1 == -1)
-		return (-1);
+	{
+		len1 = ft_putnbr_u(n / 10, buffer_struct);
+		if (len1 == -1)
+			return (-1);
+	}
 	len2 = ft_putchar_buffer('0' + n % 10, buffer_struct);
+	if (len2 == -1)
+		return (-1);
 	return (len1 + len2);
 }

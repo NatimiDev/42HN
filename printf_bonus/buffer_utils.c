@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 16:23:26 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/24 00:36:35 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/24 16:47:47 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,12 @@ ssize_t	ft_min(ssize_t a, ssize_t b)
 	if (a <= b)
 		return (a);
 	return (b);
+}
+
+void	get_flags(t_buffer *buffer, const char *flags, int flag_pos)
+{
+	buffer->format_width = get_width(flags, flag_pos, &buffer->null_paddling);
+	buffer->format_prec = get_precision(flags, flag_pos);
+	buffer->left_alligned = find_char_len('-', flags, flag_pos);
+	buffer->resize_value = compute_resize_value(flags[flag_pos], buffer);
 }
