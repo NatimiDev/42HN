@@ -6,72 +6,53 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 17:41:49 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/24 19:41:28 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/25 11:21:48 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putnbr(int n, char plus_space, t_buffer *buffer_struct)
+int	ft_putnbr(int n, char plus_space, t_printf_data *printf_data)
 {
-	int	len1;
-	int	len2;
-
-	len1 = 0;
 	if (n == 0)
-		buffer_struct->is_null = 1;
+		printf_data->is_null = 1;
 	if (n == -2147483648)
 	{
-		buffer_struct->sign = '-';
-		return (ft_putstr("2147483648", buffer_struct));
+		printf_data->sign = '-';
+		return (ft_putstr("2147483648", printf_data));
 	}
-	len2 = 0;
 	if (n < 0)
 	{
-		buffer_struct->sign = '-';
+		printf_data->sign = '-';
 		n *= -1;
 	}
 	else if (plus_space)
-		buffer_struct->sign = plus_space;
-	if (len2 == -1)
-		return (-1);
-	len1 += len2;
-	return (len1 + ft_putnbr_rec(n, buffer_struct));
+		printf_data->sign = plus_space;
+	return (ft_putnbr_rec(n, printf_data));
 }
 
-int	ft_putnbr_rec(int n, t_buffer *buffer_struct)
+int	ft_putnbr_rec(int n, t_printf_data *printf_data)
 {
-	int	len1;
-	int	len2;
-
-	len1 = 0;
-	len2 = 0;
-	if (n > 9)
-		len2 = ft_putnbr_rec(n / 10, buffer_struct);
-	if (len2 == -1)
-		return (-1);
-	len1 += len2;
-	len2 = ft_putchar_buffer('0' + n % 10, buffer_struct);
-	if (len2 == -1)
-		return (-1);
-	return (len1 + len2);
-}
-
-int	ft_putnbr_u(unsigned int n, t_buffer *buffer_struct)
-{
-	int	len1;
-	int	len2;
-
-	if (n == 0)
-		buffer_struct->is_null = 1;
 	if (n > 9)
 	{
-		len1 = ft_putnbr_u(n / 10, buffer_struct);
-		if (len1 == -1)
-			return (-1);
+		if (!ft_putnbr_rec(n / 10, printf_data))
+			return (0);
 	}
-	len2 = ft_putchar_buffer('0' + n % 10, buffer_struct);
-	if (len2 == -1)
-		return (-1);
-	return (len1 + len2);
+	if (!ft_putchar('0' + n % 10, printf_data))
+		return (0);
+	return (1);
+}
+
+int	ft_putnbr_u(unsigned int n, t_printf_data *printf_data)
+{
+	if (n == 0)
+		printf_data->is_null = 1;
+	if (n > 9)
+	{
+		if (!ft_putnbr_u(n / 10, printf_data))
+			return (0);
+	}
+	if (!ft_putchar('0' + n % 10, printf_data))
+		return (0);
+	return (1);
 }

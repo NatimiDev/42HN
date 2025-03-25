@@ -6,12 +6,9 @@ CFLAGS = -Wall -Wextra -Werror
 NAME = libftprintf.a
 
 # Source and object files
-SRCS = ft_printf.c buffer_init.c buffer_utils.c buffer_write.c format_utils.c \
-	utils_char.c utils_dec.c utils_hex.c utils_str.c utils.c
-BONUS_SRCS = ft_printf.c buffer_init.c buffer_utils.c buffer_write.c format_utils.c \
-	utils_char.c utils_dec.c utils_hex.c utils_str.c utils.c
+SRCS = ft_printf.c printf_data_init.c printf_data_utils.c format_utils.c \
+	utils_char.c utils_dec.c utils_hex.c utils_str.c utils.c write_buffer.c
 OBJS = $(SRCS:.c=.o)
-BONUS_OBJS = $(BONUS_SRCS:.c=.o)
 
 all: $(NAME)
 
@@ -26,10 +23,6 @@ fclean: clean
 
 re: fclean all
 
-bonus: $(BONUS_OBJS)
-	ar rcs $(NAME) $(BONUS_OBJS)
-
-clean_bonus:
-	rm -f $(BONUS_OBJS)
+bonus: all
 
 .PHONY: all clean fclean re bonus

@@ -6,38 +6,36 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 23:04:57 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/24 10:19:21 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/25 11:33:06 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <string.h>
 #include "ft_printf.h"
 
-int	ft_putchar(char c)
+int	ft_writechar(char c)
 {
 	return (write(1, &c, 1));
 }
 
-int	ft_putchar_times(char c, size_t len)
+int	ft_writechar_n(char c, size_t n)
 {
 	char		*char_chain;
 	size_t		i;
-	int			len1;
+	int			len;
 
-	char_chain = (char *)malloc(sizeof(char) * (len + 1));
+	char_chain = (char *)malloc(sizeof(char) * (n + 1));
 	if (!char_chain)
 		return (-1);
 	i = 0;
-	while (i < len)
+	while (i < n)
 	{
 		char_chain[i] = c;
 		i++;
 	}
 	char_chain[i] = '\0';
-	len1 = write(1, char_chain, len);
+	len = write(1, char_chain, n);
 	free(char_chain);
-	return (len1);
+	return (len);
 }
 
 int	find_char(char c, const char *str)

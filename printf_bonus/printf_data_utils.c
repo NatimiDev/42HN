@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   buffer_utils.c                                     :+:      :+:    :+:   */
+/*   printf_data_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 16:23:26 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/03/24 16:47:47 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/03/25 11:27:49 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
 #include "ft_printf.h"
 
-int	has_sign(t_buffer *buffer)
+int	has_sign(t_printf_data *printf_data)
 {
-	return ((buffer->sign != 0));
+	return ((printf_data->sign != 0));
 }
 
-int	has_hex_prefix(t_buffer *buffer)
+int	has_hex_prefix(t_printf_data *printf_data)
 {
-	return ((buffer->hex_prefix[0] != 0));
+	return ((printf_data->hex_prefix[0] != 0));
 }
 
 ssize_t	ft_max(ssize_t a, ssize_t b)
@@ -46,10 +44,12 @@ ssize_t	ft_min(ssize_t a, ssize_t b)
 	return (b);
 }
 
-void	get_flags(t_buffer *buffer, const char *flags, int flag_pos)
+void	get_flags(t_printf_data *printf_data, const char *flags, int flag_pos)
 {
-	buffer->format_width = get_width(flags, flag_pos, &buffer->null_paddling);
-	buffer->format_prec = get_precision(flags, flag_pos);
-	buffer->left_alligned = find_char_len('-', flags, flag_pos);
-	buffer->resize_value = compute_resize_value(flags[flag_pos], buffer);
+	printf_data->format_width = get_width(flags, flag_pos,
+			&printf_data->null_paddling);
+	printf_data->format_prec = get_precision(flags, flag_pos);
+	printf_data->left_alligned = find_char_len('-', flags, flag_pos);
+	printf_data->resize_value = compute_resize_value(flags[flag_pos],
+			printf_data);
 }
